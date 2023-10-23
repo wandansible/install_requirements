@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include wandansible.install_requirements"
+      ansible.builtin.include_role:
+        name: "wandansible.install_requirements"
+      vars:
+        install_requirements_ansible_playbook_dir: >-
+          "{{ lookup('ansible.builtin.env', 'GITHUB_WORKSPACE') }}/molecule/default/"

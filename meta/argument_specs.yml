@@ -1,0 +1,12 @@
+---
+argument_specs:
+  main:
+    short_description: Install ansible requirements with ansible-galaxy.
+    description: |
+      Install ansible role and collection requirements from requirements.yml
+      with ansible-galaxy on the host running ansible playbooks.
+    options:
+      install_requirements_ansible_playbook_dir:
+        description: Path to ansible playbook directory
+        type: str
+        default: "{{ ansible_config_file | dirname }}"
