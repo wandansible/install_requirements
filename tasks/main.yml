@@ -9,6 +9,9 @@
           ansible-galaxy install --force
           --roles-path "{{ install_requirements_ansible_playbook_dir }}/.ansible/roles"
           -r "{{ install_requirements_ansible_playbook_dir }}/requirements.yml"
+      register: _ansible_galaxy_roles_install
+      changed_when: >-
+        "Nothing to do" not in _ansible_galaxy_roles_install.stdout
       tags: molecule-idempotence-notest
 
     - name: Install required ansible collections with ansible-galaxy
@@ -17,4 +20,7 @@
           ansible-galaxy collection install --force --force-with-deps
           --collections-path "{{ install_requirements_ansible_playbook_dir }}/.ansible/collections"
           -r "{{ install_requirements_ansible_playbook_dir }}/requirements.yml"
+      register: _ansible_galaxy_collections_install
+      changed_when: >-
+        "Nothing to do" not in _ansible_galaxy_collections_install.stdout
       tags: molecule-idempotence-notest
