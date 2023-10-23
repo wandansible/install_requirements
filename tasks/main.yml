@@ -1,0 +1,18 @@
+---
+- name: Install ansible requirements with ansible-galaxy on local machine running ansible
+  delegate_to: localhost
+  become: false
+  block:
+    - name: Install required ansible roles with ansible-galaxy
+      ansible.builtin.command:
+        cmd: >-
+          ansible-galaxy install --force
+          --roles-path "{{ install_requirements_ansible_playbook_dir }}/.ansible/roles"
+          -r "{{ install_requirements_ansible_playbook_dir }}/requirements.yml"
+
+    - name: Install required ansible collections with ansible-galaxy
+      ansible.builtin.command:
+        cmd: >-
+          ansible-galaxy collection install --force --force-with-deps
+          --collections-path "{{ install_requirements_ansible_playbook_dir }}/.ansible/collections"
+          -r "{{ install_requirements_ansible_playbook_dir }}/requirements.yml"

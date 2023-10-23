@@ -1,0 +1,2 @@
+---
+install_requirements_ansible_playbook_dir: "{{ ansible_config_file | dirname }}"
